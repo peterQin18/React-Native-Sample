@@ -15,8 +15,14 @@ import {
   View,
   Button,
   TouchableOpacity,
+  Alert,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  Platform,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import AppleComponent from './AppComponent';
+import { Colors } from "./Colors";
 const Cat = props => {
   // const name = 'xiaoming';
   return (
@@ -217,59 +223,185 @@ const styles = StyleSheet.create({
     color: '#67980d',
   },
 });
-class Square extends React.Component {
-  render() {
-    return <button className="square">{this.props.valueOf}</button>;
+// export default class App extends Component<Props> {
+//   render(): React$Node {
+//     // eslint-disable-next-line react-hooks/rules-of-hooks
+//     // const [color, setColor] = useState('红色');
+//     const name = '文本';
+//     let params = {apple_color: '红色', apple_price: 9.9, apple_weight: 1.8};
+//     let {apple_color, apple_weight} = params;
+//     return (
+//       <View>
+//         <AppleComponent
+//           apple_color={apple_color}
+//           apple_weight={apple_weight}
+//           apple_price={9.9}
+//         />
+//         <Text
+//           style={{marginTop: 20}}
+//           onPress={() => {
+//             console.log('点击了');
+//           }}>
+//           {name}
+//         </Text>
+//       </View>
+//     );
+//   }
+// }
+// export default FlexDirectionBasics;
+
+// JavaScript提供的逻辑与运算符（&&）的短路原理规定：当&&运算的左侧为false时，右侧不予计算。该运算符适合多分支的判定
+let flag = true;
+const element = () => {
+  return (
+    <View style={buttonStyles.row}>
+      {/*{flag && <Text>我是box元素 </Text>}*/}
+      {/*{!flag && <Text>我是fox元素</Text>}*/}
+      {getTarget()}
+      <Text style={{fontSize: 20, color: '#d99800', width: 300, height: 40}}>
+        Hao de
+      </Text>
+      <Button
+        title="button"
+        onPress={() => {
+          Alert.alert('你点击了按钮');
+        }}></Button>
+    </View>
+  );
+};
+
+const buttonStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  buttonContainer: {
+    margin: 20,
+  },
+  alternativeLayoutButtonContainer: {
+    margin: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  row: {
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+  },
+});
+
+function getTarget() {
+  if (flag) {
+    return <Text> 好呀</Text>;
+  } else {
+    return <Text>不好</Text>;
   }
 }
 
-class Board extends React.Component {
-  renderSquare(i) {
-    return <Square value={i} />;
+// export default class ButtonBasic extends Component {
+//   _onPressButton() {
+//     Alert.alert('You tapped the button!');
+//   }
+//   render() {
+//     return (
+//       <View style={buttonStyles.container}>
+//         <View style={buttonStyles.buttonContainer}>
+//           <Button title="Press Me" onPress={this._onPressButton} />
+//         </View>
+//         <View style={buttonStyles.buttonContainer}>
+//           <Button
+//             title="Press me"
+//             onPress={this._onPressButton}
+//             color="#841584"
+//           />
+//         </View>
+//         <View style={buttonStyles.alternativeLayoutButtonContainer}>
+//           <Button title="This looks great!" onPress={this._onPressButton} />
+//           <Button title="OK!" onPress={this._onPressButton} color="#841584" />
+//         </View>
+//       </View>
+//     );
+//   }
+// }
+// 使用Touchable 系列组件
+// 一般使用 TouchableHighlight 来制作按钮或者链接，注意此组件的背景会在用户按下时变暗
+//在 Android 上海可以使用TouchableNativeFeedback,它会在用户手指按下时行程类似墨水涟漪的视觉效果
+// TouchableOpacity 会在用户手指按下时降低按钮的透明度，而不会改变背景的颜色
+// 如果你想在处理点击事件的同时不显示任何视觉反馈，则需要使用 TouchableWithoutFeedback
+export default class Touchables extends Component {
+  _onPressButton() {
+    Alert.alert('You update the button');
   }
-  render() {
-    const status = 'Next player: X';
-    return (
-      <div>
-        <div className="status">{status}</div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div children="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
-  }
-}
 
-export default class App extends Component<Props> {
-  render(): React$Node {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    // const [color, setColor] = useState('红色');
-    const name = '文本';
+  _onLongPressButton() {
+    Alert.alert('You long-pressed the button!');
+  }
+
+  /**
+   *  underlayColor  点击按下时的颜色
+   * @returns {JSX.Element}
+   */
+  render() {
     return (
-      <View>
-        <AppleComponent apple_color="绿色" />
-        <Text
-          style={{marginTop: 20}}
-          onPress={() => {
-            console.log('点击了');
-          }}>
-          {name}
-        </Text>
+      <View style={touchStyles.container}>
+        <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
+          <View style={touchStyles.button}>
+            <Text style={touchStyles.buttonText}>TouchableHighlight</Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableOpacity onPress={this._onPressButton}>
+          <View style={touchStyles.button}>
+            <Text style={touchStyles.buttonText}>TouchableOpacity</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableNativeFeedback
+          onPress={this._onPressButton}
+          background={
+            Platform.OS === 'android'
+              ? TouchableNativeFeedback.SelectableBackground()
+              : ''
+          }>
+          <View style={touchStyles.button}>
+            <Text style={touchStyles.buttonText}>TouchableNativeFeedback</Text>
+          </View>
+        </TouchableNativeFeedback>
+        <TouchableWithoutFeedback onPress={this._onPressButton}>
+          <View style={touchStyles.button}>
+            <Text style={touchStyles.buttonText}>
+              TouchableWithoutFeedback 001
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableHighlight
+          onPress={this._onPressButton}
+          onLongPress={this._onLongPressButton}
+          underlayColor={Colors.color_white}>
+          <View style={touchStyles.button}>
+            <Text style={touchStyles.buttonText}>
+              Touchable with long Press
+            </Text>
+          </View>
+        </TouchableHighlight>
       </View>
     );
   }
 }
 
-// export default FlexDirectionBasics;
+const touchStyles = StyleSheet.create({
+  container: {
+    padding: 60,
+    alignItems: 'center',
+  },
+  button: {
+    marginBottom: 30,
+    width: 260,
+    backgroundColor: '#2196F3',
+    borderRadius: 30,
+    height: 60,
+    justifyContent: 'center',
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: Colors.color_white,
+    fontSize: 16,
+  },
+});

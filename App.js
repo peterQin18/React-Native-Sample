@@ -22,7 +22,22 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import AppleComponent from './AppComponent';
-import { Colors } from "./Colors";
+// import {Colors} from './Colors';
+import {render} from 'react-native/Libraries/Renderer/implementations/ReactFabric-prod';
+import {createAppContainer, StackNavigator} from 'react-navigation';
+import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
+
+// import DetailsScreen from './DetailsScreen';
+// import SecondActivity from './SecondActivity';
+// import Home from './HomeScreen';
+
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import HomeScreen from './HomeScreen';
+import DetailsScreen from './DetailsScreen';
+import ModalScreen from './ModalScreen';
+import WidgetDetails from './WidgetDetails';
+import KeyboardAvoiding from './KeyboardAvoiding';
 const Cat = props => {
   // const name = 'xiaoming';
   return (
@@ -126,56 +141,56 @@ const PizzaTranslator = () => {
   );
 };
 
-const PreviewLayout = ({
-  label,
-  children,
-  values,
-  selectedValue,
-  setSelectedValue,
-}) => (
-  <View style={{margin: 10, flex: 1, backgroundColor: '#ffffff'}}>
-    <Text style={styles.label}>{label}</Text>
-    <View style={styles.row}>
-      {values.map(value => (
-        <TouchableOpacity
-          key={value}
-          onPress={() => {
-            console.log(value);
-            setSelectedValue(value);
-            console.log(selectedValue);
-          }}
-          style={[styles.button, selectedValue === value && styles.selected]}>
-          <Text
-            style={[
-              styles.buttonLabel,
-              selectedValue === value && styles.selectedLabel,
-            ]}>
-            {value}
-          </Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-    <View style={(styles.container, {[label]: selectedValue})}>{children}</View>
-  </View>
-);
+// const PreviewLayout = ({
+//   label,
+//   children,
+//   values,
+//   selectedValue,
+//   setSelectedValue,
+// }) => (
+//   <View style={{margin: 10, flex: 1, backgroundColor: '#ffffff'}}>
+//     <Text style={styles.label}>{label}</Text>
+//     <View style={styles.row}>
+//       {values.map(value => (
+//         <TouchableOpacity
+//           key={value}
+//           onPress={() => {
+//             console.log(value);
+//             setSelectedValue(value);
+//             console.log(selectedValue);
+//           }}
+//           style={[styles.button, selectedValue === value && styles.selected]}>
+//           <Text
+//             style={[
+//               styles.buttonLabel,
+//               selectedValue === value && styles.selectedLabel,
+//             ]}>
+//             {value}
+//           </Text>
+//         </TouchableOpacity>
+//       ))}
+//     </View>
+//     <View style={(styles.container, {[label]: selectedValue})}>{children}</View>
+//   </View>
+// );
+//
+// const FlexDirectionBasics = () => {
+//   const [flexDirection, setFlexDirection] = useState('column');
+//   return (
+//     <PreviewLayout
+//       label="flexDirection"
+//       values={['column', 'row', 'row-reverse', 'column-reverse']}
+//       selectedValue={flexDirection}
+//       setSelectedValue={setFlexDirection}>
+//       {/* eslint-disable-next-line react-native/no-inline-styles */}
+//       <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
+//       <View style={[styles.box, {backgroundColor: 'skyblue'}]} />
+//       <View style={[styles.box, {backgroundColor: 'steelblue'}]} />
+//     </PreviewLayout>
+//   );
+// };
 
-const FlexDirectionBasics = () => {
-  const [flexDirection, setFlexDirection] = useState('column');
-  return (
-    <PreviewLayout
-      label="flexDirection"
-      values={['column', 'row', 'row-reverse', 'column-reverse']}
-      selectedValue={flexDirection}
-      setSelectedValue={setFlexDirection}>
-      {/* eslint-disable-next-line react-native/no-inline-styles */}
-      <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
-      <View style={[styles.box, {backgroundColor: 'skyblue'}]} />
-      <View style={[styles.box, {backgroundColor: 'steelblue'}]} />
-    </PreviewLayout>
-  );
-};
-
-const styles = StyleSheet.create({
+const stylesNormal = StyleSheet.create({
   container: {
     flex: 1,
     margin: 8,
@@ -255,8 +270,8 @@ let flag = true;
 const element = () => {
   return (
     <View style={buttonStyles.row}>
-      {/*{flag && <Text>我是box元素 </Text>}*/}
-      {/*{!flag && <Text>我是fox元素</Text>}*/}
+      {flag && <Text>我是box元素 </Text>}
+      {!flag && <Text>我是fox元素</Text>}
       {getTarget()}
       <Text style={{fontSize: 20, color: '#d99800', width: 300, height: 40}}>
         Hao de
@@ -265,7 +280,8 @@ const element = () => {
         title="button"
         onPress={() => {
           Alert.alert('你点击了按钮');
-        }}></Button>
+        }}
+      />
     </View>
   );
 };
@@ -327,15 +343,37 @@ function getTarget() {
 //在 Android 上海可以使用TouchableNativeFeedback,它会在用户手指按下时行程类似墨水涟漪的视觉效果
 // TouchableOpacity 会在用户手指按下时降低按钮的透明度，而不会改变背景的颜色
 // 如果你想在处理点击事件的同时不显示任何视觉反馈，则需要使用 TouchableWithoutFeedback
-export default class Touchables extends Component {
+
+const name = '';
+class Touchables extends Component {
   _onPressButton() {
+    // fetch('https://localhost:8080');
+    // bar();
+    var x = 6;
+    // foo01();
+    // console.log(add(1, 7, 9, 3));
+    // test();
+    // var a = [];
+    // push(a,1,2,3);
+    // testOperator();
+    // let myObj = {size: 10, label: 'Size 10 Object'};
+    // console.log(printLabel(myObj));
+    // console.log(obj01.c());
+    // printLabel_01({label: 'Size 10 Object -----'});
+
+    // let mySquare = createSquare({color: 'black'});
+    // console.log(mySquare);
+    // testPro();
+    // TypeScript 函数
+    // let cardPicker = deck.createCardPicker();
+    // let pickedCard = cardPicker();
+    // console.log("card: "+pickedCard.card + "of"+pickedCard.suit);
     Alert.alert('You update the button');
   }
 
   _onLongPressButton() {
     Alert.alert('You long-pressed the button!');
   }
-
   /**
    *  underlayColor  点击按下时的颜色
    * @returns {JSX.Element}
@@ -374,13 +412,14 @@ export default class Touchables extends Component {
         <TouchableHighlight
           onPress={this._onPressButton}
           onLongPress={this._onLongPressButton}
-          underlayColor={Colors.color_white}>
+          underlayColor="white">
           <View style={touchStyles.button}>
             <Text style={touchStyles.buttonText}>
               Touchable with long Press
             </Text>
           </View>
         </TouchableHighlight>
+        {name ? <Text>prod 环境</Text> : <Text>未知环境</Text>}
       </View>
     );
   }
@@ -393,7 +432,7 @@ const touchStyles = StyleSheet.create({
   },
   button: {
     marginBottom: 30,
-    width: 260,
+    width: 250,
     backgroundColor: '#2196F3',
     borderRadius: 30,
     height: 60,
@@ -401,7 +440,23 @@ const touchStyles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    color: Colors.color_white,
+    color: 'white',
     fontSize: 16,
   },
 });
+const Stack = createNativeStackNavigator();
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="WidgetDetails" component={WidgetDetails} />
+        <Stack.Screen name="KeyboardAvoiding" component={KeyboardAvoiding} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;

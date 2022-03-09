@@ -35,9 +35,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
-import ModalScreen from './ModalScreen';
-import WidgetDetails from './WidgetDetails';
+import ModalScreen from './src/widget/detail/ModalScreen';
+import WidgetDetails from './src/widget/WidgetDetails';
 import KeyboardAvoiding from './KeyboardAvoiding';
+import PressableWidget from './src/widget/detail/PressableWidget';
+import RefreshControlWidget from './src/widget/detail/RefreshControlWidget';
+import ScrollViewWidget from './src/widget/detail/ScrollViewWidget';
+import {sectionListWidget} from './src/widget/detail/SectionListWidget';
+import StatusBarWidget from './src/widget/detail/StatusBarWidget';
+import SwitchWidget from './src/widget/detail/SwitchWidget';
 const Cat = props => {
   // const name = 'xiaoming';
   return (
@@ -454,6 +460,15 @@ function App() {
         <Stack.Screen name="Modal" component={ModalScreen} />
         <Stack.Screen name="WidgetDetails" component={WidgetDetails} />
         <Stack.Screen name="KeyboardAvoiding" component={KeyboardAvoiding} />
+        <Stack.Screen name="PressableWidget" component={PressableWidget} />
+        <Stack.Screen
+          name="RefreshControlWidget"
+          component={RefreshControlWidget}
+        />
+        <Stack.Screen name="ScrollView" component={ScrollViewWidget} />
+        <Stack.Screen name="SectionList" component={sectionListWidget} />
+        <Stack.Screen name="StatusBar" component={StatusBarWidget} />
+        <Stack.Screen name={'Switch'} component={SwitchWidget} />
       </Stack.Navigator>
     </NavigationContainer>
   );

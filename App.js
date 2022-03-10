@@ -44,6 +44,8 @@ import ScrollViewWidget from './src/widget/detail/ScrollViewWidget';
 import {sectionListWidget} from './src/widget/detail/SectionListWidget';
 import StatusBarWidget from './src/widget/detail/StatusBarWidget';
 import SwitchWidget from './src/widget/detail/SwitchWidget';
+import {TextInANest} from './src/widget/detail/TextWidget';
+import UselessTextInputMultiline from './src/widget/detail/TextInputWidget';
 const Cat = props => {
   // const name = 'xiaoming';
   return (
@@ -469,6 +471,11 @@ function App() {
         <Stack.Screen name="SectionList" component={sectionListWidget} />
         <Stack.Screen name="StatusBar" component={StatusBarWidget} />
         <Stack.Screen name={'Switch'} component={SwitchWidget} />
+        <Stack.Screen name={'TextInANest'} component={TextInANest} />
+        <Stack.Screen
+          name={'TextInput'}
+          component={UselessTextInputMultiline}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

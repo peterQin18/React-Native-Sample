@@ -67,6 +67,22 @@ const WidgetDetails = ({navigation}) => {
         }}>
         <Text style={styles.textStyle}> Switch 组件</Text>
       </TouchableHighlight>
+
+      <TouchableHighlight
+        style={styles.buttonStyle}
+        onPress={() => {
+          navigation.navigate('TextInANest');
+        }}>
+        <Text style={styles.textStyle}> TextInANest 组件</Text>
+      </TouchableHighlight>
+
+      <TouchableHighlight
+        style={styles.buttonStyle}
+        onPress={() => {
+          navigation.navigate('TextInput');
+        }}>
+        <Text style={styles.textStyle}> TextInput 组件</Text>
+      </TouchableHighlight>
     </View>
   );
 };

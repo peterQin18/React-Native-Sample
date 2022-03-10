@@ -25,4 +25,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  switchStyle: {
+    width: 50,
+    height: 30,
+    backgroundColor: '#ff0000',
+  },
 });
